@@ -1,0 +1,111 @@
+openapi: 3.0.3
+info:
+  title: BreakingBadAPI
+  description: NewsAPI.org
+  version: 1.0.0
+servers:
+  - url: https://www.breakingbadapi.com/api/
+tags:
+  - name: breaking bad stuff
+    description: The Breaking Bad API is a collection of information on the Vince Gilligan series Breaking Bad
+paths:
+  /characters/:
+    get:
+      tags:
+        - characters by catergory
+      summary: Characters List by Category
+      operationId: charactersGetByCategory
+      parameters:
+        - name: limit
+          in: query
+          description: limit of page
+          required: false
+          schema:
+            type: integer
+        - name: offset
+          in: query
+          description: offset of page
+          required: false
+          schema:
+            type: integer
+        - name: category
+          in: query
+          description: name of the show
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharacterList'
+  /characters/{userId}:
+    get:
+      tags:
+        - character
+      summary: Character by Id
+      operationId: characterGetById
+      parameters:
+        - name: userId
+          in: path
+          description: user id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharacterList'
+components:
+  schemas:
+    CharacterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Character'
+    Character:
+      required:
+        - "char_id"
+        - "name"
+        - "birthday"
+        - "occupation"
+        - "img"
+        - "status"
+        - "nickname"
+        - "appearance"
+        - "portrayed"
+        - "category"
+        - "better_call_saul_appearance"
+      properties:
+        char_id:
+          type: number
+        name:
+          type: string
+        birthday:
+          type: string
+        occupation:
+          type: array
+          items:
+            type: string
+        img:
+          type: string
+        status:
+          type: string
+        nickname:
+          type: string
+        appearance:
+          type: array
+          items:
+            type: number
+        portrayed:
+          type: string
+        category:
+          type: string
+        better_call_saul_appearance:
+          type: array
+          items:
+            type: integer
