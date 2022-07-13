@@ -61,8 +61,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CharacterList'
+  /quote/:
+    get:
+      tags:
+        - quotes
+      summary: Get quote by author
+      operationId: quotesByAuthor
+      parameters:
+        - name: author
+          in: query
+          description: author fullname
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteList'
 components:
   schemas:
+    QuoteList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Quote'
+    Quote:
+      required:
+        - "quote_id"
+        - "quote"
+        - "author"
+        - "series"
+      properties:
+        quote_id:
+          type: number
+        quote:
+          type: string
+        author:
+          type: string
+        series:
+          type: string
     CharacterList:
       type: array
       items:

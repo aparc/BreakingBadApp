@@ -39,10 +39,9 @@ struct CharacterRow: View {
 			
 			Text(character.name)
 				.font(.title2)
-				.foregroundColor(.white)
 			
 			Spacer()
 		}
-		.frame(height: 75)
+		.frame(height: 70)
     }
 }

@@ -28,4 +28,10 @@ final class CharactersViewModel: ObservableObject {
 			}
 	}
 	
+	func cleanList() {
+		charactersList.removeAll()
+		page = 0
+		canLoad = true
+	}
+	
 }

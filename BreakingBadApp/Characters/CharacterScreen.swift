@@ -33,6 +33,20 @@ struct CharacterScreen: View {
 				}
 				.layoutPriority(1)
 				VStack {
+					HStack {
+						Spacer()
+						NavigationScreen(destination: LazyView(QuotesScreen(author: character.name))) {
+							
+							Text("Quotes")
+								.foregroundColor(.white)
+								.padding(10)
+								.background(
+									RoundedRectangle(cornerRadius: 8)
+										.fill(.green)
+								)
+						}
+						
+					}
 					Spacer()
 					HStack {
 						Text(character.name)
