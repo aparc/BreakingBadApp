@@ -8,24 +8,23 @@
 import Foundation
 import SwiftUI
 import TVShowsNetwork
+import ServiceLocator
 
-final class CharactersViewModel: ObservableObject {
+@MainActor final class CharactersViewModel: ObservableObject {
 	
 	@Published private(set) var charactersList: [ModelCharacter] = []
 	@Published private(set) var canLoad: Bool = true
+	@Injected private var characterService: CharacterWebService?
 	private var page: Int = 0
 	
 	func fetchCharacters(by category: String) {
-		CharactersByCatergoryAPI.charactersGetByCategory(
-			category: category,
-			limit: APIHelper.pageSize,
-			offset: page) { data, _ in
-				guard let batch = data else { return }
-				
-				self.charactersList.append(contentsOf: batch)
-				self.page += 10
-				self.canLoad = batch.count == APIHelper.pageSize
-			}
+		Task { 
+			guard let characters = await characterService?.getCharacters(category, page) else { return }
+			
+			charactersList.append(contentsOf: characters)
+			page += 10
+			canLoad = characters.count == APIHelper.pageSize
+		}
 	}
 	
 	func cleanList() {

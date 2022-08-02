@@ -6,9 +6,16 @@
 //
 
 import SwiftUI
+import ServiceLocator
 
 @main
 struct BreakingBadApp: App {
+	
+	init() {
+		Configurator.shared.registerService(CharacterWebService())
+		Configurator.shared.registerService(QuotesWebService())
+	}
+	
     var body: some Scene {
         WindowGroup {
 			Root()

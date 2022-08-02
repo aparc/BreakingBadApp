@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NavigationStack
 
 struct CharacterListView: View {
 	
@@ -17,11 +18,14 @@ struct CharacterListView: View {
 			title
 			list
 				.onAppear {
-					viewModel.fetchCharacters(by: category.rawValue)
+					
+						viewModel.fetchCharacters(by: category.rawValue)
+					
 				}
 				.onChange(of: category) { newValue in
 					viewModel.cleanList()
 					viewModel.fetchCharacters(by: newValue.rawValue)
+					
 				}
 		}
 	} // body

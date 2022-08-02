@@ -7,6 +7,7 @@
 
 import SwiftUI
 import TVShowsNetwork
+import NavigationStack
 
 struct CharacterScreen: View {
 	

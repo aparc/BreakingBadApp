@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NavigationStack
 
 enum TVShow: String, CaseIterable {
 	
